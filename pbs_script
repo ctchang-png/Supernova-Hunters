@@ -1,0 +1,15 @@
+#!/bin/bash
+#PBS -l walltime=1:30:00,nodes=1:ppn=24:gpus=2,pmem=3000mb
+#PBS -m abe
+#PBS -M chan1820@umn.edu
+#PBS -N Chang_Supernova_Hunters
+#PBS -e error.log
+#PBS -o output.log
+source ~/.bashrc
+cd ~/Zooniverse
+rm -rf logs
+rm -rf saved_models/*
+rm -rf checkpoints/*
+module load conda
+conda activate tf2
+python Main.py

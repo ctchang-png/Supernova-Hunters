@@ -1,0 +1,3 @@
+Magnitude derivation (Just wait on data)
+Save ensembles from "/saved_models" to "/Ensembles/{architecture}_{datamethod}_MDR{MDR}"
+Data augmentation (upscale, downscale, add noise?)
