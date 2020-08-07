@@ -271,7 +271,7 @@ def get_model(model_architecture):
     model = make_BaselineFlat()
   elif model_architecture == "CustomResNet20x20":
     model = make_CustomResNet20x20()
-  elif model_architechture == "LargeResNet":
+  elif model_architecture == "LargeResNet":
     model = make_LargeResNet()
   else:
     raise NotImplementedError("Model not yet implemented")

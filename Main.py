@@ -43,14 +43,14 @@ def run_training(model, train_ds, valid_ds, epochs, batch_size):
               tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_prefix,
                 save_weights_only=True)]
   
-  if tf.__version__ == '2.2.0':
+  if tf.__version__ in {'2.2.0', '2.3.0'}:
     #In 2.2 validation_data cannot be a from_generator dataset
     #If validation_data is not a dataset, validation_batch_size must be specified
     valid_x, valid_y = dataset2array(valid_ds)
     model.fit(train_ds, validation_data=(valid_x, valid_y), validation_batch_size=batch_size,
               epochs=epochs, callbacks=callbacks, verbose=2)
   else:
-    raise Exception("bad tf version")
+    raise Exception("Version not implemented. Verify which datasets can be added to model.fit")
 
 ######################
 ## Training/Results ##
@@ -206,6 +206,6 @@ def compare_models():
   plt.show()
 
 #train(architecture, data_type, n_folds, epochs)
-train("LargeResNet", "Skfold", 1, 250)
-#check_test_set("CustomResNet")
+#train("LargeResNet", "Skfold", 1, 250)
+check_test_set("CustomResNet", folder="Ensembles/CustomResNet100x100_Fivefold_MDR11")
 #compare_models()
