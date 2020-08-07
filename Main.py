@@ -206,6 +206,6 @@ def compare_models():
   plt.show()
 
 #train(architecture, data_type, n_folds, epochs)
-#train("CustomResNet", "Skfold", 5, 135)
-check_test_set("CustomResNet")
+train("LargeResNet", "Skfold", 1, 250)
+#check_test_set("CustomResNet")
 #compare_models()

@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 
 def load_data(model_architecture):
     out = dict()
-    if model_architecture in ["CustomResNet", "BaselineCNN"]:
+    if model_architecture in ["CustomResNet", "BaselineCNN", "LargeResNet"]:
         data = scipy.io.loadmat("datasets/3pi_100x100_channels3_formatted")
         #data = scipy.io.loadmat("datasets/3pi_50x50_channels3_formatted")
 

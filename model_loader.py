@@ -204,6 +204,35 @@ def make_CustomResNet():
                 metrics=[f1_m]) #look into mdr
   return model
 
+def make_LargeResNet():
+  inputs = tf.keras.Input(shape=(100, 100, 3))
+  x = Conv2D(16, 3, padding='same',
+    kernel_regularizer='l2', bias_regularizer='l2')(inputs)
+  for _ in range(4):
+    x = res_block(x, 16, 3)
+  x = Conv2D(32, 3, activation='relu', padding='same',  
+    kernel_regularizer='l2', bias_regularizer='l2')(x)
+  for _ in range(4):
+    x = res_block(x, 32, 3)
+  x = Conv2D(64, 3, activation='relu', padding='same',  
+    kernel_regularizer='l2', bias_regularizer='l2')(x)
+  for _ in range(4):
+    x = res_block(x, 64, 3)
+  x = GlobalAveragePooling2D()(x)
+  x = Flatten()(x)
+  x = Dense(512, activation='relu', 
+    kernel_regularizer='l2', bias_regularizer='l2')(x)
+  x = Dropout(0.5)(x)
+  x = Dense(256, activation='relu', 
+    kernel_regularizer='l2', bias_regularizer='l2')(x)
+  x = Dropout(0.5)(x)
+  outputs = Dense(1, activation='sigmoid', 
+    kernel_regularizer='l2', bias_regularizer='l2')(x)
+  model = Model(inputs, outputs)
+  model.compile(loss=tf.keras.losses.BinaryCrossentropy(),
+                optimizer=tf.keras.optimizers.SGD(learning_rate=0.03),
+                metrics=[f1_m]) #look into mdr
+  return model
 
 def make_CustomResNet20x20():
   inputs = Input(shape=(400,))
@@ -242,6 +271,8 @@ def get_model(model_architecture):
     model = make_BaselineFlat()
   elif model_architecture == "CustomResNet20x20":
     model = make_CustomResNet20x20()
+  elif model_architechture == "LargeResNet":
+    model = make_LargeResNet()
   else:
     raise NotImplementedError("Model not yet implemented")
   #model.run_eagerly = False #Eagerly runs slower (especially on mirrored strategy) but cannot do custom metric/loss
