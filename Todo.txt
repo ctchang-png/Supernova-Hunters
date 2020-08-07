@@ -5,3 +5,5 @@ Data augmentation (upscale, downscale, add noise?)
 Github
 Final Wrap-up
 	MDR, F1, reproduction method, Magnitudes maybe
+	Spreadsheet comparison
+	Discussion about soft_f1 loss

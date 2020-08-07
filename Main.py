@@ -1,11 +1,8 @@
 import os
-import scipy.io as sio
 import tensorflow as tf
 
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-from sklearn.metrics import roc_curve, f1_score, accuracy_score
 
 from dataset_loader import *
 from model_loader import *
@@ -208,8 +205,7 @@ def compare_models():
     ax.text(score/2, i, "{:0.3f}".format(score), ha='center', va='center')
   plt.show()
 
-
 #train(architecture, data_type, n_folds, epochs)
-#train("CustomResNet", "Skfold", 5, 200)
+#train("CustomResNet", "Skfold", 5, 135)
 check_test_set("CustomResNet")
 #compare_models()

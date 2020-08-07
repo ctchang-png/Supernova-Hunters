@@ -4,4 +4,4 @@ tensorflow-datasets
 numpy
 matplotlib
 scikit-learn
-scipy
+scipys

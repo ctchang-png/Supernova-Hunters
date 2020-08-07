@@ -1,0 +1,8 @@
+*.log
+Todo.txt
+checkpoints/*
+datasets/*
+.vscode
+graphs/*
+test.py
+saved_models/*

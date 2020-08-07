@@ -199,8 +199,8 @@ def make_CustomResNet():
   outputs = Dense(1, activation='sigmoid', 
     kernel_regularizer='l2', bias_regularizer='l2')(x)
   model = Model(inputs, outputs)
-  model.compile(loss=f1_loss,
-                optimizer=tf.keras.optimizers.SGD(learning_rate=0.02),
+  model.compile(loss=tf.keras.losses.BinaryCrossentropy(),
+                optimizer=tf.keras.optimizers.SGD(learning_rate=0.03),
                 metrics=[f1_m]) #look into mdr
   return model
 
