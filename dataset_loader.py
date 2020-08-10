@@ -50,9 +50,9 @@ def load_data(model_architecture):
         out["f_test"] = data["test_files"]
         out["f_train"] = data["train_files"]
     elif model_architecture in ["BaselineFlat", "CustomResNet20x20"]:
-        #data = scipy.io.loadmat("datasets/3pi_20x20_small")
+        data = scipy.io.loadmat("datasets/3pi_20x20_small")
         #data = scipy.io.loadmat("datasets/psst_20x20_large")
-        data = scipy.io.loadmat("datasets/3pi_20x20_xpert_testset")
+        #data = scipy.io.loadmat("datasets/3pi_20x20_xpert_testset")
         #data = scipy.io.loadmat("datasets/3pi_20x20_xpert_halfreal")
         
         x_train = data['x_train'] #(m, 400)

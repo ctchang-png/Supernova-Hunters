@@ -57,7 +57,7 @@ def run_training(model, train_ds, valid_ds, epochs, batch_size):
 ######################
 
 def train(architecture, data_type, folds, epoch):
-  batch_size = 128
+  batch_size = 256
   super_batch_size = batch_size * strategy.num_replicas_in_sync
   #for model in os.listdir("./saved_models/"):
   #  os.remove(os.path.join("./saved_models/", model))
@@ -206,6 +206,6 @@ def compare_models():
   plt.show()
 
 #train(architecture, data_type, n_folds, epochs)
-#train("BaselineFlat", "Standard", 1, 50)
-check_test_set("CustomResNet20x20", folder="Ensembles/CustomResNet20x20_Fivebag_MDR42")
+train("CustomResNet100x100", "Kfold", 5, 120)
+#check_test_set("CustomResNet20x20", folder="Ensembles/CustomResNet20x20_Fivebag_MDR42")
 #compare_models()
