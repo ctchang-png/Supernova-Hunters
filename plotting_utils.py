@@ -101,11 +101,7 @@ def dataset2array(dataset):
 
 
 def name2color(s):
-  #This is a dumb way of doing this
-  r = 0xFF0000 & hash(s)
-  g = 0x00FF00 & hash(s)
-  b = 0x0000FF & hash(s)
-  res = "#" + hex(r | g | b )[2:]
-  while len(res) < 7:
-    res += "0"
-  return res
+  D = {"Standard": "0xec5d37",
+       "Fivefold": "0xffc800",
+       "Fivebag": "0xf64975"}
+  return D[s]
