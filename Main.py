@@ -169,7 +169,7 @@ def compare_models():
   plt.ylim((0,0.30))
   plt.plot([0,1],[0.01,0.01], 'k--')
   plt.plot([0,1],[0.05,0.05], 'k--')
-  for ensemble in ["BaselineCNN_Fivebag_MDR21", "BaselineFlat_Fivefold_MDR30", \
+  for ensemble in ["CustomResNet100x100_Fivefold_MDR11", "BaselineFlat_Fivefold_MDR30", \
                    "CustomResNet_Fivebag_MDR14", "CustomResNet20x20_Fivebag_MDR26"]:
     name = ensemble.split("_")[0]
     method = ensemble.split("_")[1]
@@ -190,7 +190,7 @@ def compare_models():
   ax.set_xlim((0,1))
   colors = ["#e898ac", "#00cfcc", "#ff9973", "#a9a9a9"]
   for i, ensemble in enumerate(["CustomResNet_Fivebag_MDR14", \
-                   "BaselineCNN_Fivebag_MDR21", \
+                   "CustomResNet100x100_Fivefold_MDR11", \
                    "CustomResNet20x20_Fivebag_MDR26", \
                    "BaselineFlat_Fivefold_MDR30"]):
     name = ensemble.split("_")[0]
@@ -207,5 +207,5 @@ def compare_models():
 
 #train(architecture, data_type, n_folds, epochs)
 #train("LargeResNet", "Skfold", 1, 250)
-check_test_set("CustomResNet", folder="Ensembles/CustomResNet100x100_Fivefold_MDR11")
-#compare_models()
+#check_test_set("CustomResNet", folder="Ensembles/CustomResNet100x100_Fivefold_MDR11")
+compare_models()

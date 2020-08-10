@@ -174,8 +174,8 @@ def make_BaselineFlat():
   return model
 
 
-def make_CustomResNet():
-  inputs = tf.keras.Input(shape=(100, 100, 3))
+def make_CustomResNet50x50():
+  inputs = tf.keras.Input(shape=(50, 50, 3))
   x = Conv2D(16, 3, padding='same',
     kernel_regularizer='l2', bias_regularizer='l2')(inputs)
   for _ in range(1):
@@ -204,19 +204,19 @@ def make_CustomResNet():
                 metrics=[f1_m]) #look into mdr
   return model
 
-def make_LargeResNet():
+def make_CustomResNet100x100():
   inputs = tf.keras.Input(shape=(100, 100, 3))
   x = Conv2D(16, 3, padding='same',
     kernel_regularizer='l2', bias_regularizer='l2')(inputs)
-  for _ in range(4):
+  for _ in range(1):
     x = res_block(x, 16, 3)
   x = Conv2D(32, 3, activation='relu', padding='same',  
     kernel_regularizer='l2', bias_regularizer='l2')(x)
-  for _ in range(4):
+  for _ in range(1):
     x = res_block(x, 32, 3)
   x = Conv2D(64, 3, activation='relu', padding='same',  
     kernel_regularizer='l2', bias_regularizer='l2')(x)
-  for _ in range(4):
+  for _ in range(1):
     x = res_block(x, 64, 3)
   x = GlobalAveragePooling2D()(x)
   x = Flatten()(x)
@@ -263,16 +263,14 @@ def make_CustomResNet20x20():
 
 
 def get_model(model_architecture):
-  if model_architecture == "CustomResNet":
-    model = make_CustomResNet()
-  elif model_architecture == "BaselineCNN":
-    model = make_BaselineCNN()
+  if model_architecture == "CustomResNet50x50":
+    model = make_CustomResNet50x50()
   elif model_architecture == "BaselineFlat":
     model = make_BaselineFlat()
   elif model_architecture == "CustomResNet20x20":
     model = make_CustomResNet20x20()
-  elif model_architecture == "LargeResNet":
-    model = make_LargeResNet()
+  elif model_architecture == "CustomResNet100x100":
+    model = make_CustomResNet100x100()
   else:
     raise NotImplementedError("Model not yet implemented")
   #model.run_eagerly = False #Eagerly runs slower (especially on mirrored strategy) but cannot do custom metric/loss

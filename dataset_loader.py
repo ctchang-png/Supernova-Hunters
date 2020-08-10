@@ -15,9 +15,25 @@ import matplotlib.pyplot as plt
 
 def load_data(model_architecture):
     out = dict()
-    if model_architecture in ["CustomResNet", "BaselineCNN", "LargeResNet"]:
+    if model_architecture in ["CustomResNet50x50"]:
+        data = scipy.io.loadmat("datasets/3pi_50x50_channels3_formatted")
+
+        x_train = data['x_train'] #(m, 100,100,3)
+        y_train = data['y_train'] #(m, 1)
+        #print(np.shape(x_train))
+
+        out["x_train"] = x_train
+        out["y_train"] = y_train
+
+        x_test = data['x_test'] #(m, 100,100,3)
+        y_test = data['y_test']
+
+        out["x_test"] = x_test
+        out["y_test"] = y_test
+        out["f_test"] = data["test_files"]
+        out["f_train"] = data["train_files"]
+    elif model_architecture in ["CustomResNet100x100"]:
         data = scipy.io.loadmat("datasets/3pi_100x100_channels3_formatted")
-        #data = scipy.io.loadmat("datasets/3pi_50x50_channels3_formatted")
 
         x_train = data['x_train'] #(m, 100,100,3)
         y_train = data['y_train'] #(m, 1)
@@ -36,8 +52,8 @@ def load_data(model_architecture):
     elif model_architecture in ["BaselineFlat", "CustomResNet20x20"]:
         #data = scipy.io.loadmat("datasets/3pi_20x20_small")
         #data = scipy.io.loadmat("datasets/psst_20x20_large")
-        #data = scipy.io.loadmat("datasets/3pi_20x20_xpert_testset")
-        data = scipy.io.loadmat("datasets/3pi_20x20_xpert_halfreal")
+        data = scipy.io.loadmat("datasets/3pi_20x20_xpert_testset")
+        #data = scipy.io.loadmat("datasets/3pi_20x20_xpert_halfreal")
         
         x_train = data['x_train'] #(m, 400)
         y_train = data['y_train'] #(m, 1)
