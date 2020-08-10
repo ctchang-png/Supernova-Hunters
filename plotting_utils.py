@@ -101,7 +101,10 @@ def dataset2array(dataset):
 
 
 def name2color(s):
-  D = {"Standard": "0xec5d37",
-       "Fivefold": "0xffc800",
-       "Fivebag": "0xf64975"}
+  D = {"Standard": "#ec5d37",
+       "Fivefold": "#ffc800",
+       "Fivebag": "#f64975",
+       "CustomResNet100x100": "#00cfcc",
+       "CustomResNet50x50": "#e898ac",
+       "BaselineFlat": "#a9a9a9"}
   return D[s]

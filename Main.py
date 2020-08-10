@@ -3,6 +3,7 @@ import tensorflow as tf
 
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.metrics import f1_score
 
 from dataset_loader import *
 from model_loader import *
@@ -132,6 +133,8 @@ def compare_models():
   plots = dict()
 
   for ensemble in os.listdir("./Ensembles/"):
+    if ensemble == "OLD":
+      continue
     print(ensemble)
     name = ensemble.split("_")[0]
     method = ensemble.split("_")[1]
@@ -188,9 +191,8 @@ def compare_models():
   ax.invert_yaxis()
   ax.xaxis.set_visible(False)
   ax.set_xlim((0,1))
-  colors = ["#e898ac", "#00cfcc", "#ff9973", "#a9a9a9"]
-  for i, ensemble in enumerate(["CustomResNet50x50_Fivebag_MDR14", \
-                   "CustomResNet100x100_Fivefold_MDR11",
+  for i, ensemble in enumerate(["CustomResNet100x100_Fivefold_MDR11", \
+                   "CustomResNet50x50_Fivebag_MDR14",
                    "BaselineFlat_Fivefold_MDR30"]):
     name = ensemble.split("_")[0]
     _, test_ds = make_std_ds(None, name, 32)
@@ -200,11 +202,11 @@ def compare_models():
     FoM, threshold , fpr, tpr = one_percent_fpr(labels, predictions, percent_fpr)
     score = f1_score(labels, predictions>threshold)
     print(ensemble + " " + str(score))
-    ax.barh(name, score, color=colors[i])
+    ax.barh(name, score, color=name2color(name))
     ax.text(score/2, i, "{:0.3f}".format(score), ha='center', va='center')
   plt.show()
 
 #train(architecture, data_type, n_folds, epochs)
 #train("CustomResNet100x100", "Kfold", 5, 120)
-#check_test_set("CustomResNet100x100")
-compare_models()
+check_test_set("BaselineFlat", folder="Ensembles/BaselineFlat_Standard_MDR35")
+#compare_models()
