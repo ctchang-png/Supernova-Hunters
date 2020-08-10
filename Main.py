@@ -207,5 +207,5 @@ def compare_models():
 
 #train(architecture, data_type, n_folds, epochs)
 #train("BaselineFlat", "Standard", 1, 50)
-check_test_set("CustomResNet20x20", folder="Ensembles/CustomResNet20x20_Fivebag_MDR42")
-#compare_models()
+#check_test_set("CustomResNet20x20", folder="Ensembles/CustomResNet20x20_Fivebag_MDR42")
+compare_models()
