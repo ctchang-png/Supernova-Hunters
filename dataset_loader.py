@@ -91,7 +91,7 @@ def make_std_ds(placeholder, model_architecture, batch_size):
   x_test = data["x_test"]
   y_test = data["y_test"]
   f_test = data["f_test"]
-  #f_train = data["f_train"] <-------------get later
+  #f_train = data["f_train"] <--------unused
   m = np.shape(Y)[0]
 
   def gen():
@@ -110,7 +110,7 @@ def make_kfold_ds(n_splits, model_architecture, batch_size):
   x_test = data["x_test"]
   y_test = data["y_test"]
   #f_test = data["f_test"]
-  #f_train = data["f_train"] <-------------get later
+  #f_train = data["f_train"] <------unused
 
   def gen():
     for train_index, test_index in KFold(n_splits=n_splits).split(X):
@@ -140,7 +140,7 @@ def make_bagged_ds(n_bags, model_architecture, batch_size):
   x_test = data["x_test"]
   y_test = data["y_test"]
   #f_test = data["f_test"]
-  #f_train = data["f_train"] <-------------get later
+  #f_train = data["f_train"] <-------unusued
   m = np.shape(Y)[0]
   def gen():
     for _ in range(n_bags):
@@ -159,7 +159,7 @@ def make_skfold_ds(n_splits, model_architecture, batch_size):
   x_test = data["x_test"]
   y_test = data["y_test"]
   #f_test = data["f_test"]
-  #f_train = data["f_train"] <-------------get later
+  #f_train = data["f_train"] <--------unused
 
   def gen():
     for train_index, test_index in StratifiedShuffleSplit(n_splits=n_splits, test_size=0.20).split(X, Y):
