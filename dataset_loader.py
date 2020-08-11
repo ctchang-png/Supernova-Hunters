@@ -90,7 +90,7 @@ def make_std_ds(placeholder, model_architecture, batch_size):
   Y = data["y_train"]
   x_test = data["x_test"]
   y_test = data["y_test"]
-  #f_test = data["f_test"]
+  f_test = data["f_test"]
   #f_train = data["f_train"] <-------------get later
   m = np.shape(Y)[0]
 
@@ -100,7 +100,8 @@ def make_std_ds(placeholder, model_architecture, batch_size):
     yield x_train,y_train,x_valid,y_valid
   
   test_ds = tf.data.Dataset.from_tensor_slices((x_test, y_test)).batch(batch_size)
-  return tf.data.Dataset.from_generator(gen, (tf.float64,tf.float64,tf.float64,tf.float64)), test_ds
+  train_ds = tf.data.Dataset.from_generator(gen, (tf.float64,tf.float64,tf.float64,tf.float64))
+  return train_ds, test_ds, f_test
 
 def make_kfold_ds(n_splits, model_architecture, batch_size):
   data = load_data(model_architecture)
@@ -118,7 +119,8 @@ def make_kfold_ds(n_splits, model_architecture, batch_size):
       yield X_train,y_train,X_test,y_test
   
   test_ds = tf.data.Dataset.from_tensor_slices((x_test, y_test)).batch(batch_size)
-  return tf.data.Dataset.from_generator(gen, (tf.float64,tf.float64,tf.float64,tf.float64)), test_ds
+  train_ds = tf.data.Dataset.from_generator(gen, (tf.float64,tf.float64,tf.float64,tf.float64))
+  return train_ds, test_ds, None
 
 def make_bag(X, Y):
   m = np.shape(Y)[0]
@@ -147,7 +149,8 @@ def make_bagged_ds(n_bags, model_architecture, batch_size):
       yield x_train,y_train,x_test,y_test
 
   test_ds = tf.data.Dataset.from_tensor_slices((x_test, y_test)).batch(batch_size)
-  return tf.data.Dataset.from_generator(gen, (tf.float64,tf.float64,tf.float64,tf.float64)), test_ds
+  train_ds = tf.data.Dataset.from_generator(gen, (tf.float64,tf.float64,tf.float64,tf.float64))
+  return train_ds, test_ds, None
 
 def make_skfold_ds(n_splits, model_architecture, batch_size):
   data = load_data(model_architecture)
@@ -165,7 +168,8 @@ def make_skfold_ds(n_splits, model_architecture, batch_size):
       yield X_train,y_train,X_test,y_test
   
   test_ds = tf.data.Dataset.from_tensor_slices((x_test, y_test)).batch(batch_size)
-  return tf.data.Dataset.from_generator(gen, (tf.float64,tf.float64,tf.float64,tf.float64)), test_ds
+  train_ds = tf.data.Dataset.from_generator(gen, (tf.float64,tf.float64,tf.float64,tf.float64))
+  return train_ds, test_ds, None
 
 def make_batches(x_train, y_train, x_valid, y_valid, batch_size):
   train_ds = tf.data.Dataset.from_tensor_slices((x_train, y_train)).batch(batch_size, drop_remainder=True)
@@ -185,7 +189,7 @@ def get_ds_fn(data_type):
   else:
     raise NotImplementedError
 
-#for 3pi_20x20_small
+#for 3pi
 def load_magnitude_data():
   D = dict()
   for row in open('./datasets/test_real_3pi_c1_Stl.csv').readlines():
