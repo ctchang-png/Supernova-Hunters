@@ -210,7 +210,7 @@ def compare_models():
   plt.show()
 
 #train(architecture, data_method, n_folds, epochs)
-#train("BaselineCNN", "Standard", 1, 150)
+train("BaselineFlat", "Bagging", 5, 75)
 #check_test_set(architecture, folder="saved_models/")
-check_test_set("CustomResNet100x100", folder="Ensembles/CustomResNet100x100_Fivefold_MDR11")
+#check_test_set("BaselineFlat", folder="Ensembles/OLD/CustomResNet20x20_Fivefold_MDR27")
 #compare_models()
