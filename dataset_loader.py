@@ -32,7 +32,7 @@ def load_data(model_architecture):
         out["y_test"] = y_test
         out["f_test"] = data["test_files"]
         out["f_train"] = data["train_files"]
-    elif model_architecture in ["CustomResNet100x100"]:
+    elif model_architecture in ["CustomResNet100x100", "BaselineCNN"]:
         data = scipy.io.loadmat("datasets/3pi_100x100_channels3_formatted")
 
         x_train = data['x_train'] #(m, 100,100,3)

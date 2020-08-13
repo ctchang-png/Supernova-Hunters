@@ -123,7 +123,7 @@ def f1_loss(y_true, y_pred):
 
 def make_BaselineCNN():
   reg = 0.0001
-  inputs = Input(shape=(50,50,3))
+  inputs = Input(shape=(100,100,3))
   x = Conv2D(16, 2, activation='relu', \
     bias_regularizer=regularizers.l2(reg), \
     kernel_regularizer=regularizers.l2(reg))(inputs)
@@ -271,6 +271,8 @@ def get_model(model_architecture):
     model = make_CustomResNet20x20()
   elif model_architecture == "CustomResNet100x100":
     model = make_CustomResNet100x100()
+  elif model_architecture == "BaselineCNN":
+    model = make_BaselineCNN()
   else:
     raise NotImplementedError("Model not yet implemented")
   #model.run_eagerly = False #Eagerly runs slower (especially on mirrored strategy) but cannot do custom metric/loss
